@@ -163,31 +163,31 @@ const SinglePostPage = () => {
               </Link>
             </div>
           </div>
-          <PostMenuActions post={data}/>
+          <PostMenuActions post={data} />
           <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
           <div className="flex flex-col gap-2 text-sm">
             <Link className="underline">All</Link>
             <Link className="underline" to="/">
-              Web Design
+              Fashion Trends
             </Link>
             <Link className="underline" to="/">
-              Development
+              Styling Tips
             </Link>
             <Link className="underline" to="/">
-              Databases
+              Product Guides
             </Link>
             <Link className="underline" to="/">
-              Search Engines
+              Deals & Offers
             </Link>
             <Link className="underline" to="/">
-              Marketing
+              Lifestyle Content
             </Link>
           </div>
           <h1 className="mt-8 mb-4 text-sm font-medium">Search</h1>
           <Search />
         </div>
       </div>
-      <Comments postId={data._id}/>
+      <Comments postId={data._id} />
     </div>
   );
 };

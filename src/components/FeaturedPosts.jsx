@@ -30,30 +30,30 @@ const FeaturedPosts = () => {
       {/* First */}
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
         {/* image */}
-        {posts[0]?.img && <Image
-          src={posts[0]?.img}
+        {posts[0].img && <Image
+          src={posts[0].img}
           className="rounded-3xl object-cover"
           w="895"
         />}
         {/* details */}
         <div className="flex items-center gap-4">
           <h1 className="font-semibold lg:text-lg">01.</h1>
-          <Link className="text-blue-800 lg:text-lg">{posts[0]?.category}</Link>
-          <span className="text-gray-500">{format(posts[0]?.createdAt)}</span>
+          <Link className="text-blue-800 lg:text-lg">{posts[0].category}</Link>
+          <span className="text-gray-500">{format(posts[0].createdAt)}</span>
         </div>
         {/* title */}
         <Link
-          to={posts[0]?.slug}
+          to={posts[0].slug}
           className="text-xl lg:text-3xl font-semibold lg:font-bold"
         >
-          {posts[0]?.title}
+          {posts[0].title}
         </Link>
       </div>
       {/* Others */}
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
         {/* second */}
         {posts[1] && <div className="lg:h-1/3 flex justify-between gap-4">
-          {posts[1]?.img && <div className="w-1/3 aspect-video">
+          {posts[1].img && <div className="w-1/3 aspect-video">
             <Image
               src={posts[1].img}
               className="rounded-3xl object-cover w-full h-full"
@@ -70,10 +70,10 @@ const FeaturedPosts = () => {
             </div>
             {/* title */}
             <Link
-              to={posts[1]?.slug}
+              to={posts[1].slug}
               className="text-base sm:text-lg md:text-2xl lg:text-xl xl:text-2xl font-medium"
             >
-              {posts[1]?.title}
+              {posts[1].title}
             </Link>
           </div>
         </div>}
