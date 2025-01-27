@@ -2,49 +2,35 @@ import { Link } from "react-router-dom";
 import Search from "./Search";
 
 const MainCategories = () => {
+
+  const categories = [
+    { path: "/posts", label: "All Posts", isHighlighted: true },
+    { path: "/posts?cat=fashion-trends", label: "Fashion Trends" },
+    { path: "/posts?cat=styling-tips", label: "Styling Tips" },
+    { path: "/posts?cat=product-guides", label: "Product Guides" },
+    { path: "/posts?cat=deals-offers", label: "Deals & Offers" },
+    { path: "/posts?cat=lifestyle-content", label: "Lifestyle Content" },
+  ];
+
   return (
-    <div className="hidden md:flex bg-white rounded-3xl xl:rounded-full p-4 shadow-lg items-center justify-center gap-8">
-      {/* links */}
-      <div className="flex-1 flex items-center justify-between flex-wrap">
-        <Link
-          to="/posts"
-          className="bg-blue-800 text-white rounded-full px-4 py-2"
-        >
-          All Posts
-        </Link>
-        <Link
-          to="/posts?cat=fashion-trends"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
-        >
-          Fashion Trends
-        </Link>
-        <Link
-          to="/posts?cat=styling-tips"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
-        >
-          Styling Tips
-        </Link>
-        <Link
-          to="/posts?cat=product-guides"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
-        >
-          Product Guides
-        </Link>
-        <Link
-          to="/posts?cat=deals-offers"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
-        >
-          Deals & Offers
-        </Link>
-        <Link
-          to="/posts?cat=lifestyle-content"
-          className="hover:bg-blue-50 rounded-full px-4 py-2"
-        >
-          Lifestyle Content
-        </Link>
+    <div className="hidden md:flex bg-white rounded-3xl xl:rounded-full p-4 shadow-lg items-center justify-center gap-4 flex-wrap">
+      <div className="flex-1 flex items-center justify-center gap-4 flex-wrap">
+        {categories.map((category, index) => (
+          <Link
+            key={index}
+            to={category.path}
+            className={`rounded-full px-4 py-2 ${
+              category.isHighlighted
+                ? "bg-blue-800 text-white"
+                : "hover:bg-blue-50 text-gray-700"
+            }`}
+          >
+            {category.label}
+          </Link>
+        ))}
       </div>
       <span className="text-xl font-medium">|</span>
-      {/* search */}
+
       <Search />
     </div>
   );
