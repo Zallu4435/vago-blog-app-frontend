@@ -5,7 +5,9 @@ const AboutPage = () => {
     <div className="p-4 md:p-8 flex flex-col gap-8">
       {/* BREADCRUMB */}
       <div className="flex gap-2 text-md text-gray-600">
-        <Link to="/" className="hover:text-blue-600">Home</Link>
+        <Link to="/" className="hover:text-blue-600">
+          Home
+        </Link>
         <span>•</span>
         <span className="text-blue-800 font-semibold">About Us</span>
       </div>
@@ -16,9 +18,10 @@ const AboutPage = () => {
           About Us: Your Gateway to Fashion and Lifestyle
         </h1>
         <p className="mt-4 text-md md:text-lg text-gray-600 max-w-3xl">
-          Welcome to our vibrant corner of the internet, where fashion meets lifestyle! 
-          We are a community of trend enthusiasts, creative stylists, and individuals who 
-          believe in the power of style to inspire confidence and self-expression.
+          Welcome to our vibrant corner of the internet, where fashion meets
+          lifestyle! We are a community of trend enthusiasts, creative stylists,
+          and individuals who believe in the power of style to inspire
+          confidence and self-expression.
         </p>
       </div>
 
@@ -36,8 +39,8 @@ const AboutPage = () => {
             Our Mission
           </h2>
           <p className="mt-4 text-md md:text-lg text-gray-600">
-            Our goal is to bring you the best in fashion and lifestyle content. 
-            From the latest trends to exclusive guides and deals, we’re here to 
+            Our goal is to bring you the best in fashion and lifestyle content.
+            From the latest trends to exclusive guides and deals, we’re here to
             make your journey toward confidence and style seamless.
           </p>
         </div>
@@ -57,9 +60,9 @@ const AboutPage = () => {
             Our Vision
           </h2>
           <p className="mt-4 text-md md:text-lg text-gray-600">
-            We envision a world where fashion and lifestyle are accessible to everyone. 
-            Our goal is to inspire individuality, promote creativity, and celebrate 
-            stylish living—on your terms.
+            We envision a world where fashion and lifestyle are accessible to
+            everyone. Our goal is to inspire individuality, promote creativity,
+            and celebrate stylish living—on your terms.
           </p>
         </div>
       </div>
@@ -70,9 +73,9 @@ const AboutPage = () => {
           Meet Our Team
         </h2>
         <p className="mt-4 text-md md:text-lg text-gray-600 max-w-3xl mx-auto">
-          Behind every post, guide, and tip is a passionate team of fashion lovers, 
-          style experts, and lifestyle enthusiasts working tirelessly to curate content 
-          that inspires and empowers.
+          Behind every post, guide, and tip is a passionate team of fashion
+          lovers, style experts, and lifestyle enthusiasts working tirelessly to
+          curate content that inspires and empowers.
         </p>
       </div>
 
@@ -82,15 +85,18 @@ const AboutPage = () => {
           Join Our Community
         </h2>
         <p className="text-md md:text-lg text-gray-600 text-center max-w-2xl">
-          Connect with like-minded individuals! Share your ideas, ask for styling tips, 
-          and build meaningful connections in our vibrant chat community.
+          Connect with like-minded individuals! Share your ideas, ask for
+          styling tips, and build meaningful connections in our vibrant chat
+          community.
         </p>
-        <Link
-          to="/chat"
+        <a
+          href="https://vago-chat-app.onrender.com/login" 
+          target="_blank" 
+          rel="noopener noreferrer" 
           className="bg-blue-800 text-white px-6 py-2 rounded-lg hover:bg-blue-700 text-md md:text-lg"
         >
           Join Our Chat Community
-        </Link>
+        </a>
       </div>
     </div>
   );
