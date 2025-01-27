@@ -13,7 +13,7 @@ const Homepage = () => {
         <span className="text-blue-800">Blogs and Articles</span>
       </div>
       {/* INTRODUCTION */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         {/* titles */}
         <div>
           <h1 className="text-gray-800 text-2xl md:text-5xl lg:text-6xl font-bold">
@@ -25,7 +25,56 @@ const Homepage = () => {
             Your journey to a chic and confident you starts here.
           </p>
         </div>
-        {/* animated button */}
+
+        {/* Write button for mobile */}
+        <div className="md:hidden w-full px-4">
+          <Link to="/write" className="block">
+            <button className="group relative w-full overflow-hidden py-4 bg-gradient-to-r from-blue-600 to-blue-800 
+              text-white rounded-lg text-lg font-semibold 
+              shadow-lg transition-all duration-300 
+              hover:shadow-blue-200 hover:shadow-xl
+              active:scale-95">
+              {/* Animated background effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-600 
+                transition-transform duration-300 transform translate-x-full group-hover:translate-x-0"></div>
+              
+              {/* Content container */}
+              <div className="relative flex items-center justify-center gap-3">
+                {/* New animated icon */}
+                <div className="relative w-8 h-8 group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="28"
+                    height="28"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    className="absolute inset-0"
+                  >
+                    {/* Feather pen icon */}
+                    <path d="M20 2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14l4 4V2z" />
+                    <path d="M16 10l-4 4-4-4" />
+                    <path d="M12 14V6" />
+                    {/* Small sparkle effects */}
+                    <circle cx="18" cy="4" r="1" className="animate-pulse" />
+                    <circle cx="16" cy="6" r="1" className="animate-pulse delay-100" />
+                  </svg>
+                </div>
+                
+                {/* Text with shine effect */}
+                <span className="relative overflow-hidden tracking-wide">
+                  Write your story
+                  {/* Shine effect */}
+                  <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform 
+                    -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shine" />
+                </span>
+              </div>
+            </button>
+          </Link>
+        </div>
+        
+        {/* animated button for desktop - unchanged */}
         <Link to="write" className="hidden md:block relative">
           <svg
             viewBox="0 0 200 200"
@@ -76,5 +125,5 @@ const Homepage = () => {
   );
 };
 
-
 export default Homepage;
+

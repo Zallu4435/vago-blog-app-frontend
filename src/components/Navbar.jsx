@@ -1,89 +1,126 @@
-import { useState } from "react";
-import Image from "./Image";
-import { Link } from "react-router-dom";
-import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import React, { useState, useEffect, useRef } from "react"
+import { Link } from "react-router-dom"
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react"
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  const navRef = useRef(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+  }, [open])
+
+  const navLinks = [
+    { to: "/", label: "Home" },
+    { to: "/posts?sort=trending", label: "Trending" },
+    { to: "/posts?sort=popular", label: "Most Popular" },
+    { to: "/about", label: "About" },
+  ]
 
   return (
-    <div className="w-full h-16 md:h-20 flex items-center justify-between">
-      {/* LOGO */}
+    <nav
+      className={`w-full h-16 md:h-20 flex items-center justify-between px-4 md:px-6 ${open ? "fixed-nav-open" : ""}`}
+      ref={navRef}
+    >
       <Link to="/" className="flex items-center gap-4 text-2xl font-bold">
-        <Image src="logo.png" alt="Lama Logo" w={32} h={32} />
+        <img src="/logo.png" alt="Vago Logo" className="w-8 h-8" />
         <span>VAGO</span>
       </Link>
-      {/* MOBILE MENU */}
-      <div className="md:hidden">
-        {/* MOBILE BUTTON */}
-        <div
-          className="cursor-pointer text-4xl"
-          onClick={() => setOpen((prev) => !prev)}
-        >
-          {/* Change Hamburger Icon */}
-          {/* {open ? "X" : "☰"} */}
-          <div className="flex flex-col gap-[5.4px]">
-            <div
-              className={`h-[3px] rounded-md w-6 bg-black origin-left transition-all ease-in-out ${
-                open && "rotate-45"
-              }`}
-            ></div>
-            <div
-              className={`h-[3px] rounded-md w-6 bg-black transition-all ease-in-out ${
-                open && "opacity-0"
-              }`}
-            ></div>
-            <div
-              className={`h-[3px] rounded-md w-6 bg-black origin-left transition-all ease-in-out ${
-                open && "-rotate-45"
-              }`}
-            ></div>
+
+      <div className="md:hidden flex items-center gap-2">
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" />
+        </SignedIn>
+        <button className="p-2 text-gray-500 hover:text-gray-700 focus:outline-none" onClick={() => setOpen(!open)}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span className="sr-only">Toggle menu</span>
+        </button>
+      </div>
+
+      {open && (
+        <div className="fixed inset-0 z-50 bg-white md:hidden">
+          <div className="flex flex-col h-full">
+            <div className="flex justify-between items-center p-4">
+              <Link to="/" className="flex items-center gap-4 text-2xl font-bold" onClick={() => setOpen(false)}>
+                <img src="/logo.png" alt="Vago Logo" className="w-8 h-8" />
+                <span>VAGO</span>
+              </Link>
+              <button
+                className="p-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                onClick={() => setOpen(false)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="flex-grow overflow-y-auto">
+              <div className="flex flex-col items-center justify-center h-full gap-8 font-medium text-lg">
+                {navLinks.map((link) => (
+                  <Link key={link.to} to={link.to} className="block px-2 py-1 text-lg" onClick={() => setOpen(false)}>
+                    {link.label}
+                  </Link>
+                ))}
+                <SignedOut>
+                  <Link to="/login" onClick={() => setOpen(false)}>
+                    <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">Login 👋</button>
+                  </Link>
+                </SignedOut>
+              </div>
+            </div>
           </div>
         </div>
-        {/* MOBILE LINK LIST */}
-        <div
-          className={`w-full h-screen bg-[#e6e6ff] flex flex-col items-center justify-center gap-8 font-medium text-lg absolute top-16 transition-all ease-in-out ${
-            open ? "-right-0" : "-right-[100%]"
-          }`}
-        >
-          <Link to="/" onClick={() => setOpen(false)}>
-            Home
-          </Link>
-          <Link to="/posts?sort=trending" onClick={() => setOpen(false)}>
-            Trending
-          </Link>
-          <Link to="/posts?sort=popular" onClick={() => setOpen(false)}>
-            Most Popular
-          </Link>
-          <Link to="/about" onClick={() => setOpen(false)}>
-            About
-          </Link>
-          <Link to="/login" onClick={() => setOpen(false)}>
-            <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
-              Login 👋
-            </button>
-          </Link>
-        </div>
-      </div>
-      {/* DESKTOP MENU */}
+      )}
+
       <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
-        <Link to="/">Home</Link>
-        <Link to="/posts?sort=trending">Trending</Link>
-        <Link to="/posts?sort=popular">Most Popular</Link>
-        <Link to="/about">About</Link>
+        {navLinks.map((link) => (
+          <Link key={link.to} to={link.to} className="hover:text-blue-600">
+            {link.label}
+          </Link>
+        ))}
         <SignedOut>
           <Link to="/login">
-            <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
-              Login 👋
-            </button>
+            <button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">Login 👋</button>
           </Link>
         </SignedOut>
         <SignedIn>
-          <UserButton />
+          <UserButton afterSignOutUrl="/" />
         </SignedIn>
       </div>
-    </div>
-  );
-};
+    </nav>
+  )
+}
 
-export default Navbar;
+export default Navbar
+
